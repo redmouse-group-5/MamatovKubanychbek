@@ -1,3 +1,5 @@
+'''BBBBB'''
+
 num = int(input('Введите целое число от 1 до 9: '))
 if num > 0 and num < 4:
     a = input('Введите строку: ')
