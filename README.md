@@ -1,0 +1,2 @@
+# MamatovKubanychbek
+Маматов Кубанычбек
