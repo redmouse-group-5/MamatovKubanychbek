@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block header %}
+     <header style="background-image: url('{% static 'img/post.jpg' %}')">
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1> {{ post.title|safe }}</h1>
+                <hr>
+                <p>
+                    <b>Posted by </b><a href="#">{{ post.author }}</a> on {{ post.created_date }}</p>
+                    <b>Update </b>{{ post.date_update }}
+                    <b>Comments </b>
+                </p>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+{% block content %}
+
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {{ post.text|safe }}
+                </div>
+            </div>
+        </div>
+    </article>
+    <div class="col-lg-8 col-lg-offset-2 text-center"
+    <h2>Comments</h2>
+            {% csrf_token %}
+    <form action="{% url 'comment_add' post.id %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Send">
+    </form>
+    {% for comment in post.get_comment %}
+        <p>Author {{ comment.author }}</p>
+        <p>{{ comment.body }}</p>
+    {% empty %}
+    <p>Not Comments</p>
+    {% endfor %}
+    </div>
+{% endblock %}

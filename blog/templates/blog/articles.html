@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Index Page
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% for post in posts %}
+                <div class="post-preview">
+                    <a href="{% url 'posts:post' post.id %}">
+                        <h2 class="post-title">
+                            {{ post.title }}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            <p>{{ post.text|safe|truncatewords:10 }}</p>
+                        </h3>
+                    </a>
+                    <p class="post-meta">
+                        <b>Posted by </b><a href="#">{{ post.author }}</a> on {{ post.created_date }}</p>
+                        <b>Update </b>{{ post.date_update }}
+                        <b>Comments </b>
+                    </p>
+                </div>
+                <hr>
+                {% empty %}
+                    <div class="post-preview">
+                        <h2 class="post-title">
+                            Not publish article
+                        </h2>
+                    </div>
+                <hr>
+                {% endfor%}
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
